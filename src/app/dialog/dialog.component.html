@@ -1,0 +1,11 @@
+<div class="dialog">
+  <dialog #dialog open>
+    <div class="dialog-content">
+      {{ message }}
+    </div>
+    <div class="dialog-buttons">
+      <button (click)="closeDialog()">Cancelar</button>
+      <button class="bg-primary" (click)="confirmDialog()">Confirmar</button>
+    </div>
+  </dialog>
+</div>

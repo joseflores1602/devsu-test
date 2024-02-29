@@ -1,0 +1,82 @@
+<div class="card">
+  <h3>Formulario de Registro</h3>
+  <div class="separator"></div>
+  <form class="grid" [formGroup]="productoForm">
+    <div class="form-group">
+      <label>Id</label>
+      <input type="text" formControlName="id" (blur)="validateProduct()" />
+      @if(existeProductoId) {
+      <div class="alert">El id ingresado ya existe</div>
+      } @if(id?.invalid && (id?.dirty || id?.touched)) {
+      <div class="alert alert-danger">
+        @if(id?.errors?.['required']) { Este campo es requerido. }
+        @if(id?.errors?.['minlength']) { El id debe tener al menos 3 caracteres
+        } @if(id?.errors?.['maxlength']) { El id debe tener máximo 10 caracteres
+        }
+      </div>
+      }
+    </div>
+    <div class="form-group">
+      <label>Nombre</label>
+      <input type="text" formControlName="name" />
+      @if(name?.invalid && (name?.dirty || name?.touched)) {
+      <div class="alert alert-danger">
+        @if(name?.errors?.['required']) { Este campo es requerido. }
+        @if(name?.errors?.['minlength']) { El nombre debe tener al menos 5
+        caracteres } @if(name?.errors?.['maxlength']) { El nombre debe tener
+        máximo 100 caracteres }
+      </div>
+      }
+    </div>
+    <div class="form-group">
+      <label>Descripción</label>
+      <input type="text" formControlName="description" />
+      @if(description?.invalid && (description?.dirty || description?.touched))
+      {
+      <div class="alert alert-danger">
+        @if(description?.errors?.['required']) { Este campo es requerido. }
+        @if(description?.errors?.['minlength']) { La descripción debe tener al
+        menos 10 caracteres } @if(description?.errors?.['maxlength']) { La
+        descripción debe tener máximo 200 caracteres }
+      </div>
+      }
+    </div>
+    <div class="form-group">
+      <label>Logo</label>
+      <input type="text" formControlName="logo" />
+      @if(logo?.invalid && (logo?.dirty || logo?.touched)) {
+      <div class="alert alert-danger">
+        @if(logo?.errors?.['required']) { Este campo es requerido. }
+      </div>
+      }
+    </div>
+    <div class="form-group">
+      <label>Fecha Liberación</label>
+      <input
+        type="date"
+        formControlName="date_release"
+        (change)="setFechaRevision()"
+      />
+      @if(dateRelease?.invalid && (dateRelease?.dirty || dateRelease?.touched))
+      {
+      <div class="alert alert-danger">
+        @if(dateRelease?.errors?.['required']) { Este campo es requerido. }
+      </div>
+      }
+    </div>
+    <div class="form-group">
+      <label>Fecha Revisión</label>
+      <input type="date" formControlName="date_revision" />
+      @if(dateRevision?.touched && dateRevision?.errors) {
+      <div class="alert alert-danger">
+        @if(dateRevision?.errors?.['required']) { Este campo es requerido. }
+      </div>
+      }
+    </div>
+  </form>
+  <div class="button-container">
+    <button (click)="navigateTo('/')">Regresar</button>
+    <button (click)="productoForm.reset()">Reiniciar</button>
+    <button class="bg-primary" (click)="guardarProducto()">Enviar</button>
+  </div>
+</div>
